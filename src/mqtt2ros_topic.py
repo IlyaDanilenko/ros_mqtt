@@ -46,13 +46,13 @@ topic_param_name=rospy.search_param("topic_names")
 topic_names=rospy.get_param(topic_param_name)
 type_param_name=rospy.search_param("type_names")
 type_names=rospy.get_param(type_param_name)
-hostname_name=rospy.search_param("hostname")
-hostname=rospy.get_param(hostname_name)
+address_name=rospy.search_param("address")
+address=rospy.get_param(address_name)
 port_name=rospy.search_param("port")
 port=rospy.get_param(port_name)
 
-if(type(hostname)!=str):
-    rospy.logerr("Hostname not set")
+if(type(address)!=str):
+    rospy.logerr("Server address not set")
     exit()
 
 if(type(port)!=int):
@@ -65,7 +65,7 @@ if(len(type_names)!=len(topic_names)):
 
 client= mqtt.Client()
 client.on_connect=on_connect
-client.connect(hostname,port,60)
+client.connect(address,port,60)
 client.loop_start()
 while not rospy.is_shutdown():
     pass
